@@ -23,6 +23,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <ProgressBar Grid.Row="1" Margin="10" Value="{Binding MyProperty1}"/>
@@ -31,6 +32,7 @@
         <ProgressBar Grid.Row="4" Margin="10" Value="{Binding MyProperty4}"/>
         <Button Grid.Row="5" Margin="50 10" cm:Message.Attach="StartAction">StartAction</Button>
         <Button Grid.Row="6" Margin="50 10" cm:Message.Attach="StartActionAsync">StartActionAsync</Button>
-        <Button Grid.Row="7" Margin="80 10" cm:Message.Attach="Restart">Restart</Button>
+        <Button Grid.Row="7" Margin="50 10" cm:Message.Attach="StartActionParallelAsync">StartActionParallelAsync</Button>
+        <Button Grid.Row="8" Margin="80 10" cm:Message.Attach="Restart">Restart</Button>
     </Grid>
 </Window>

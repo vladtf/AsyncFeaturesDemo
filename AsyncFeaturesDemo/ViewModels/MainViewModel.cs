@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,12 +58,24 @@ namespace AsyncFeaturesDemo.ViewModels
             Increase2();
             Increase3();
             Increase4();
-        }public async Task DoActionAsync()
+        }
+        public async Task DoActionAsync()
         {
             await Task.Run(()=> Increase1());
             await Task.Run(()=> Increase2());
             await Task.Run(()=> Increase3());
             await Task.Run(()=> Increase4());
+        }
+        public async Task DoActionParallelAsync()
+        {
+            var tasks = new List<Task>();
+
+            tasks.Add(Task.Run(() => Increase1()));
+            tasks.Add(Task.Run(() => Increase2()));
+            tasks.Add(Task.Run(() => Increase3()));
+            tasks.Add(Task.Run(() => Increase4()));
+
+            await Task.WhenAll(tasks);
         }
 
         public void StartAction()
@@ -80,6 +93,17 @@ namespace AsyncFeaturesDemo.ViewModels
             var watch = Stopwatch.StartNew();
 
             await DoActionAsync();
+
+            watch.Stop();
+
+            MessageBox.Show("Action finished in " + watch.ElapsedMilliseconds.ToString());
+        }
+        
+        public async void StartActionParallelAsync()
+        {
+            var watch = Stopwatch.StartNew();
+
+            await DoActionParallelAsync();
 
             watch.Stop();
 
